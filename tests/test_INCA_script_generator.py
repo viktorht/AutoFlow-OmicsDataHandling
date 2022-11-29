@@ -170,6 +170,13 @@ class test_methods(unittest.TestCase):
         )
         experimental_parameters = self.experimental_parameters
         fragments_used = self.fragments_used
+        with open("output.txt", "w") as f: # used to identify why test fails.
+            for l in experimental_parameters:
+                f.write(l)
+        with open("output_.txt", "w") as f:
+            for l in experimental_parameters_:
+                f.write(l)
+
         self.assertEqual(experimental_parameters_, experimental_parameters)
         self.assertEqual(fragments_used_, fragments_used)
 
