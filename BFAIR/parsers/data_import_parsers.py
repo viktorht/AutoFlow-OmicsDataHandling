@@ -68,7 +68,7 @@ def reaction_parser(equation_string):
             stoichiometry = stoichiometry.strip()
             # Convert the stoichiometry to an int
             stoichiometry = float(stoichiometry)
-        elif re.search(r"\d", reactant):
+        elif (bool(re.search(r" \d ", reactant)) | bool(re.search(r"^\d", reactant))):
             # Split the reactant string into the reactant and stoichiometry
             reactanct_split = reactant.split(" ")
             stoichiometry, reactant_and_carbon = reactanct_split[0], ''.join(reactanct_split[1:])
