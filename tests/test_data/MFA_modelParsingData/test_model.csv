@@ -1,0 +1,3 @@
+reaction_id,reaction_equation
+R1,1*A -> 2*B
+R2,1*B (ab) -> 1*C (ba)

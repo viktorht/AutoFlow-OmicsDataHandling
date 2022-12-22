@@ -2,6 +2,7 @@ import unittest
 import pickle
 import pathlib
 from BFAIR.mfa.INCA import parse_cobra_model
+from BFAIR.parsers.data_import_parsers import atomMapping_reactions2_file_parser
 
 current_dir = str(pathlib.Path(__file__).parent.absolute())
 
@@ -51,6 +52,25 @@ class test_methods(unittest.TestCase):
         )
         self.assertEqual(celegans_model_, celegans_model)
 
+class test_methods_atomMapping_reactions2_file_parser():
+    def setUp(self):
+        self.model_filename = "tests/test_data/MFA_modelParsingData/test_model.csv"
+        self.model_name = "test_model" 
+        self.id_columns_name = "reaction_id"
+        self.equation_columns_name = "reaction_equation"
+
+    def test_atomMapping_reactions2(self):
+        """
+        Tests the atomMapping_reactions2 function
+        """
+        df = atomMapping_reactions2_file_parser(
+            self.model_filename,
+            self.model_name,
+            self.id_columns_name,
+            self.equation_columns_name,
+        )
+        # tests that the stoichiometry is correctly parsed for compounds without carbon map
+        self.assertEqual(df.query("id == 'R1")['reactants_stoichiometry_tracked'].values, {-1})
 
 if __name__ == "__main__":
     unittest.main()
