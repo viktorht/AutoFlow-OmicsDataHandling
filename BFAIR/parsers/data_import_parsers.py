@@ -190,8 +190,8 @@ def modelReactions_file_parser(
             "subsystem": "",
             "gpr": "",
             "genes": "{}",
-            "reactant_stoichiometry": f"{{{reaction_stoichiometry}}}",
-            "product_stoichiometry": f"{{{product_stoichiometry}}}",
+            "reactants_stoichiometry": f"{{{reaction_stoichiometry}}}",
+            "products_stoichiometry": f"{{{product_stoichiometry}}}",
             "reactants_ids": f"{{{','.join([reactant[0] for reactant in reactants])}}}",
             "products_ids": f"{{{','.join([product[0] for product in products])}}}",
             "lower_bound": "0",
@@ -202,7 +202,7 @@ def modelReactions_file_parser(
             "free": "NULL",
             "reversibility": f"{reversible}",
             "weight": "NULL",
-            "used": "True",
+            "used_": "True",
             "comment_": "",
         }
         model_reaction_data.append(model_reaction_output_dict)
@@ -313,12 +313,12 @@ def atomMapping_reactions2_file_parser(
             "mapping_id": model_id,
             "rxn_id": reaction_id,
             "rxn_description": "",
-            "reactants_stoichiometry": f"{{{','.join([str(-reactant[1]) for reactant in reactants_with_carbon])}}}",
-            "products_stoichiometry": f"{{{','.join([str(product[1]) for product in products_with_carbon])}}}",
-            "reactants_ids": f"{{{','.join([reactant[0] for reactant in reactants_with_carbon])}}}",
-            "products_ids": f"{{{','.join([product[0] for product in products_with_carbon])}}}",
-            "reactants_mapping": f"{{{','.join([reactant[2] for reactant in reactants_with_carbon])}}}",
-            "products_mapping": f"{{{','.join([product[2] for product in products_with_carbon])}}}",
+            "reactants_stoichiometry_tracked": f"{{{','.join([str(-reactant[1]) for reactant in reactants_with_carbon])}}}",
+            "products_stoichiometry_tracked": f"{{{','.join([str(product[1]) for product in products_with_carbon])}}}",
+            "reactants_ids_tracked": f"{{{','.join([reactant[0] for reactant in reactants_with_carbon])}}}",
+            "products_ids_tracked": f"{{{','.join([product[0] for product in products_with_carbon])}}}",
+            "reactants_mapping": f"{{{','.join([reactant[2] for reactant in reactants_with_carbon if reactant[2] is not None])}}}",
+            "products_mapping": f"{{{','.join([product[2] for product in products_with_carbon if product[2] is not None])}}}",
             "rxn_equation": left_side
             + " "
             + ("<-->" if reversible else "-->")
